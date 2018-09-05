@@ -1,5 +1,8 @@
 Ansible and Wordpress.
 
+Scaling Wordpress using Docker-Compose using HAProxy Frontend to handle the Wordpress Backends.
+Controller will be running HAProxy, with [webservers] wordpress backend configured inside hosts/webservers file.
+
 Firstly, you need to edit the file for initial configurations,
 located under groupvars/main.yml
 
@@ -18,9 +21,6 @@ located under groupvars/main.yml
   
  
 * Please be very careful to change user_criteria under Linux OS.
-
-Scaling Wordpress using Docker-compose using HAProxy Frontend to handle the Wordpress Backends.
-Controller will be running HAProxy, with [webservers] backend configured inside hosts/webservers file.
 
 * Edit Instance List in hosts/contoller and hosts/webservers to match your servers.
 
