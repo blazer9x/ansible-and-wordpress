@@ -1,0 +1,83 @@
+---
+- hostname:
+    name: "{{ ansible_hostname }}"
+
+- name: Hosts File Override
+  template:
+    src: hosts.txt
+    dest: /etc/hosts.txt
+
+- name: Install Main Ansible Package in Remote Servers
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+   - libselinux-python
+   - epel-release
+
+
+# Turn off and disable services
+- selinux:
+    policy: targeted
+    state: permissive
+- service:
+    name: iptables
+    enabled: no
+    state: stopped
+- service:
+    name: firewalld
+    enabled: no
+    state: stopped
+- service:
+    name: ip6tables
+    enabled: no
+    state: stopped
+
+# Users and Groups
+## python -c 'import crypt; print crypt.crypt("password", "password")';
+- name: Add Group users
+  group:
+    name: "{{ common.linux_user }}"
+    state: present
+
+- name: Add Linux Users
+  user:
+    name: "{{ common.linux_user }}"
+    groups: "{{ common.linux_user }}"
+    append: yes
+    state: present
+    createhome: yes
+    password: "{{ common.linux_user_password }}"
+
+- name: Change ROOT Password
+  user:
+    name: root
+    append: yes
+    state: present
+    password: "{{ common.root_password }}"
+
+- name: Make sure we have a 'wheel' group
+  group:
+    name: wheel
+    state: present
+
+- name: Allow wheel group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+
+# App User
+- name: Make sure we have a "{{ common.app_user }}" group
+  group:
+    name: "{{ common.app_user }}"
+    state: present
+- name: Add sudoers users "{{ common.app_user }}" to wheel group
+  user:
+    name: "{{ common.app_user }}"
+    groups: wheel
+    append: yes
+    state: present
+    createhome: yes
+    password: "{{ common.app_user_password }}"

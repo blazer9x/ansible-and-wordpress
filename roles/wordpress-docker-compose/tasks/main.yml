@@ -1,0 +1,25 @@
+---
+- name: Install Docker Packages
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - python-pip
+    - docker
+
+- name: Install Docker-Compose
+  shell: pip install docker-Compose
+
+- name: Upgrade Python
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+   - python-*
+
+- name: Copying Docker-Compose Templates
+  copy: src=templates/docker-compose.yml dest=/opt/docker-compose.yml
+
+- name: Running docker-compose.yml in /opt
+  command: docker-compose -f /opt/docker-compose.yml up -d
+  when: wordpress_start == true

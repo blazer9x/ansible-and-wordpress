@@ -1,0 +1,43 @@
+---
+- name: Import Main Variables - is a must!
+  hosts: all
+  remote_user: root
+  tasks:
+  - name: Include Variables First
+    include_vars:
+      file: "{{ item }}"
+    with_items:
+    - group_vars/main.yml
+
+
+- name: The Controller Playbook
+  hosts: controller
+  remote_user: root
+  vars:
+    ansible_hostname: shopee
+  roles:
+    - common
+    - haproxy
+  tasks:
+  - name: Override Hosts
+    template:
+      src: templates/hosts.txt
+      dest: /etc/hosts
+  - name: Docker Compose File - Templates
+    template:
+      src: templates/docker-compose.yml
+      dest: /opt/docker-compose.yml
+  - name: Haproxy - Templates
+    template:
+      src: templates/haproxy.cfg
+      dest: /etc/haproxy/haproxy.cfg
+
+
+- name: The Webservers Playbook
+  hosts: webservers
+  remote_user: root
+  vars:
+    ansible_hostname: "{{ inventory_hostname }}"
+    wordpress_start: true
+  roles:
+    - wordpress-docker-compose

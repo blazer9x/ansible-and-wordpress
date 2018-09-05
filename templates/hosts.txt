@@ -1,0 +1,6 @@
+127.0.0.1     localhost localhost.localdomain localhost4 localhost4.localdomain4
+127.0.0.1     {{ ansible_hostname }}
+
+{% for servers in group_names %}
+{{ hostvars[servers]['ansible_host'] }} {{ hostvars[servers]['inventory_hostname'] }}
+{% endfor %}

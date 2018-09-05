@@ -1,0 +1,12 @@
+wordpress:
+  image: wordpress
+  links:
+    - database:mysql
+  ports:
+    - 80:80
+database:
+  image: mariadb
+  environment:
+      MYSQL_ROOT_PASSWORD: "{{ common.app_user_password }}"
+      MYSQL_USER: "{{ common.app_user }}"
+      MYSQL_PASSWORD: "{{ common.app_user_password }}"
