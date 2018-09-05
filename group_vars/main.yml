@@ -3,6 +3,6 @@ common:
   linux_user: shopee
   linux_user_password: 12vjy8B6VZQUU #123123
   root_password: 12vjy8B6VZQUU #123123
-  app_user: shopee
+  app_user: xxxxxxxxxx
   app_user_password: 12vjy8B6VZQUU #123123
-  domain_name: "myshopee.com"
+  domain_name: "xxxxxxxxxx.com"
