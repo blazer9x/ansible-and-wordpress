@@ -1,6 +1,6 @@
 common:
 ## python -c 'import crypt; print crypt.crypt("password", "password")';
-  linux_user: shopee
+  linux_user: xxxxxxxxxx
   linux_user_password: 12vjy8B6VZQUU #123123
   root_password: 12vjy8B6VZQUU #123123
   app_user: xxxxxxxxxx
