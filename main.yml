@@ -14,7 +14,7 @@
   hosts: controller
   remote_user: root
   vars:
-    ansible_hostname: shopee
+    ansible_hostname: controller1
   roles:
     - common
     - haproxy
