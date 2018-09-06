@@ -23,10 +23,6 @@
     template:
       src: templates/hosts.txt
       dest: /etc/hosts
-  - name: Docker Compose File - Templates
-    template:
-      src: templates/docker-compose.yml
-      dest: /opt/docker-compose.yml
   - name: Haproxy - Templates
     template:
       src: templates/haproxy.cfg
@@ -41,3 +37,9 @@
     wordpress_start: true
   roles:
     - wordpress-docker-compose
+  tasks:
+  - name: Copying Docker-Compose Templates
+    template: src=templates/docker-compose.yml dest=/opt/docker-compose.yml
+  - name: Running docker-compose.yml in /opt
+    command: docker-compose -f /opt/docker-compose.yml up -d
+    when: wordpress_start == true

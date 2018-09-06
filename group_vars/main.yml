@@ -1,8 +1,8 @@
 common:
 ## python -c 'import crypt; print crypt.crypt("password", "password")';
-  linux_user: xxxxxxxxxx
-  linux_user_password: 12vjy8B6VZQUU #123123
-  root_password: 12vjy8B6VZQUU #123123
-  app_user: xxxxxxxxxx
-  app_user_password: 12vjy8B6VZQUU #123123
+  linux_user: "xxxxxxxxxx"
+  linux_user_password: "12vjy8B6VZQUU" #123123
+  root_password: "12vjy8B6VZQUU" #123123
+  app_user: "xxxxxxxxxx"
+  app_user_password: "12vjy8B6VZQUU" #123123
   domain_name: "xxxxxxxxxx.com"

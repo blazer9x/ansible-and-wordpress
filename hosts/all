@@ -1,7 +1,6 @@
+# This file handled by blog-up.sh scripts, please edit the controller or webservers file in this directory
 [controller]
 controller ansible_host=192.168.56.101 ansible_port=22
-controller2 ansible_host=192.168.56.102 ansible_port=22
-
 [webservers]
 web1 ansible_host=192.168.56.101 ansible_port=22
 web2 ansible_host=192.168.56.102 ansible_port=22
